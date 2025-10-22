@@ -27,7 +27,6 @@ public class ApprovalService
             Comment = comment
         });
 
-        // why: simple 2-stage flow
         claim.Status = decision switch
         {
             Decision.Approved when stage == ApprovalStage.ProgrammeCoordinator => ClaimStatus.UnderReview,

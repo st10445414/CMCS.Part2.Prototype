@@ -31,7 +31,6 @@ public class ClaimService
 
     public async Task AddLineItemAsync(int claimId, DateTime date, string module, decimal hours, string? notes)
     {
-        // why: guard invalid hours early
         if (hours < 0 || hours > 24) throw new ArgumentOutOfRangeException(nameof(hours));
         _db.ClaimLineItems.Add(new ClaimLineItem { ClaimId = claimId, Date = date, Module = module, Hours = hours, Notes = notes });
         await RecalculateAsync(claimId);

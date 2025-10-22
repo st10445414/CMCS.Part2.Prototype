@@ -20,7 +20,6 @@ public class ApprovalsController : Controller
         return View(list);
     }
 
-    // RENAMED: was Decision(...)
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> MakeDecision(int claimId, string stage, string action, string? comment)
@@ -28,7 +27,6 @@ public class ApprovalsController : Controller
         var stg = Enum.Parse<ApprovalStage>(stage);
         var userId = stg == ApprovalStage.ProgrammeCoordinator ? DemoPCUserId : DemoAMUserId;
 
-        // fully qualify enum or use alias to be explicit
         var dec = action.ToLowerInvariant() switch
         {
             "approve" => CMCS.Models.Decision.Approved,

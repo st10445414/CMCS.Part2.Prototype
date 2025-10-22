@@ -1,8 +1,5 @@
-﻿// File: CMCS/Data/AppDbContext.cs  (replace top usings + use aliases)
 using CMCS.Models;
 using Microsoft.EntityFrameworkCore;
-
-// Aliases to avoid clash with System.Security.Claims.Claim
 using ClaimEntity = CMCS.Models.Claim;
 using ClaimLineItemEntity = CMCS.Models.ClaimLineItem;
 using SupportingDocumentEntity = CMCS.Models.SupportingDocument;
@@ -17,7 +14,6 @@ public class AppDbContext : DbContext
     public DbSet<Lecturer> Lecturers => Set<Lecturer>();
     public DbSet<User> Users => Set<User>();
 
-    // Use aliases here
     public DbSet<ClaimEntity> Claims => Set<ClaimEntity>();
     public DbSet<ClaimLineItemEntity> ClaimLineItems => Set<ClaimLineItemEntity>();
     public DbSet<SupportingDocumentEntity> SupportingDocuments => Set<SupportingDocumentEntity>();

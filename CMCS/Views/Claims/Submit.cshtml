@@ -1,0 +1,59 @@
+﻿@model CMCS.Models.Claim
+<section class="card">
+    <h2>Submit Claim — @Model.Period()</h2>
+
+    <form asp-action="AddItem" method="post">
+        <input type="hidden" name="claimId" value="@Model.ClaimId" />
+        <div class="grid">
+            <label>Date <input type="date" name="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" required /></label>
+            <label>Module <input name="module" required /></label>
+            <label>Hours <input type="number" step="0.5" min="0" max="24" name="hours" value="1" required /></label>
+        </div>
+        <label>Notes <input name="notes" /></label>
+        <div class="actions">
+            <button type="submit">Add Line</button>
+        </div>
+    </form>
+
+    <h3>Line Items</h3>
+    <table>
+        <thead><tr><th>Date</th><th>Module</th><th>Hours</th><th>Notes</th></tr></thead>
+        <tbody>
+            @foreach (var i in Model.Items)
+            {
+                <tr>
+                    <td>@i.Date.ToString("yyyy-MM-dd")</td>
+                    <td>@i.Module</td>
+                    <td>@i.Hours</td>
+                    <td>@i.Notes</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p>
+        <strong>Total Hours:</strong> @Model.TotalHours &nbsp; | &nbsp; <strong>Hourly Rate:</strong>
+        <span>@Model.HourlyRate</span> &nbsp; | &nbsp; <strong>Total Amount:</strong> @Model.TotalAmount
+    </p>
+
+    <h3>Upload Documents</h3>
+    <form asp-action="Upload" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="claimId" value="@Model.ClaimId" />
+        <input type="file" name="file" />
+        <button type="submit">Upload</button>
+        <p class="note">Allowed: .pdf .docx .xlsx .png .jpg — Max 5MB</p>
+    </form>
+    <ul>
+        @foreach (var d in Model.Documents)
+        {
+            <li><a href="@d.Url" target="_blank">@d.FileName</a> <small>@d.FileType</small></li>
+        }
+    </ul>
+
+    <form asp-action="SubmitClaim" method="post">
+        <input type="hidden" name="claimId" value="@Model.ClaimId" />
+        <div class="actions">
+            <button type="submit">Submit Claim</button>
+        </div>
+    </form>
+</section>

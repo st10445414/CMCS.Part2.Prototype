@@ -1,0 +1,20 @@
+﻿@model IEnumerable<CMCS.Models.Claim>
+<section class="card">
+    <h2>My Claims</h2>
+    <table>
+        <thead><tr><th>Claim</th><th>Period</th><th>Status</th><th>Hours</th><th>Total</th><th>Created</th></tr></thead>
+        <tbody>
+            @foreach (var c in Model)
+            {
+                <tr>
+                    <td>#@c.ClaimId</td>
+                    <td>@c.Period()</td>
+                    <td><span class="badge">@c.Status</span></td>
+                    <td>@c.TotalHours</td>
+                    <td>@c.TotalAmount</td>
+                    <td>@c.CreatedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>

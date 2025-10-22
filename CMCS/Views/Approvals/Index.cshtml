@@ -1,0 +1,50 @@
+﻿@model IEnumerable<CMCS.Models.Claim>
+
+<section class="card">
+    <h2>Approvals Queue</h2>
+    <table>
+        <thead>
+            <tr><th>Claim</th><th>LecturerId</th><th>Period</th><th>Status</th><th>PC</th><th>AM</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model)
+            {
+                <tr>
+                    <td>#@c.ClaimId</td>
+                    <td>@c.LecturerId</td>
+                    <td>@c.Period()</td>
+                    <td><span class="badge">@c.Status</span></td>
+                    <td>
+                        <form asp-action="MakeDecision" method="post" style="display:inline">
+                            <input type="hidden" name="claimId" value="@c.ClaimId" />
+                            <input type="hidden" name="stage" value="ProgrammeCoordinator" />
+                            <input type="hidden" name="action" value="approve" />
+                            <button>Approve</button>
+                        </form>
+                        <form asp-action="MakeDecision" method="post" style="display:inline">
+                            <input type="hidden" name="claimId" value="@c.ClaimId" />
+                            <input type="hidden" name="stage" value="ProgrammeCoordinator" />
+                            <input type="hidden" name="action" value="return" />
+                            <button>Return</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-action="MakeDecision" method="post" style="display:inline">
+                            <input type="hidden" name="claimId" value="@c.ClaimId" />
+                            <input type="hidden" name="stage" value="AcademicManager" />
+                            <input type="hidden" name="action" value="approve" />
+                            <button>Approve</button>
+                        </form>
+                        <form asp-action="MakeDecision" method="post" style="display:inline">
+                            <input type="hidden" name="claimId" value="@c.ClaimId" />
+                            <input type="hidden" name="stage" value="AcademicManager" />
+                            <input type="hidden" name="action" value="reject" />
+                            <button class="danger">Reject</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
+

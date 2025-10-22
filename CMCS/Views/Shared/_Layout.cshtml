@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - CMCS</title>
+    <link rel="stylesheet" href="~/css/wireframe.css" />
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">CMCS</div>
+        <nav>
+            <a asp-controller="Home" asp-action="Index">Home</a>
+            <a asp-controller="Claims" asp-action="Submit">Submit Claim</a>
+            <a asp-controller="Approvals" asp-action="Index">Approvals</a>
+            <a asp-controller="Claims" asp-action="Status">My Status</a>
+        </nav>
+    </header>
+    <main class="container">
+        @RenderBody()
+    </main>
+    @if (TempData["Toast"] is string t)
+    {
+        <div class="toast">@t</div>
+        <script>setTimeout(() => document.querySelector('.toast')?.remove(), 2500);</script>
+    }
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

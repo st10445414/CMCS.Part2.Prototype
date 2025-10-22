@@ -4,7 +4,6 @@ namespace CMCS.Data;
 
 public static class DemoSeed
 {
-    // why: give you accounts and a lecturer with one claim to interact with
     public static void Run(AppDbContext db)
     {
         if (db.Users.Any()) return;

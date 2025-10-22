@@ -12,7 +12,6 @@ public class ClaimsController : Controller
     private readonly ClaimService _claims;
     private readonly IWebHostEnvironment _env;
 
-    // why: assume single demo lecturer (id=1) for simplicity
     private const int DemoLecturerId = 1;
 
     public ClaimsController(AppDbContext db, ClaimService claims, IWebHostEnvironment env)
